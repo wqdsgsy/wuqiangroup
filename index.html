@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wu — Research Group</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500&display=swap"
+    rel="stylesheet">
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    strong {
+      font-weight: 600;
+    }
+
+    :root {
+      --navy: #1a73e8;
+      --navy-light: #1557b0;
+      --accent: #1a73e8;
+      --accent-light: #e8f0fe;
+      --text: #202124;
+      --text-muted: #5f6368;
+      --border: #dadce0;
+      --bg: #ffffff;
+      --white: #ffffff;
+      --nav-bg: #1a1a2e;
+      --nav-text: #ffffff;
+      --serif: 'EB Garamond', Georgia, serif;
+      --sans: 'DM Sans', system-ui, sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--sans);
+      font-weight: 300;
+      color: var(--text);
+      background: #ffffff;
+      font-size: 72px;
+      line-height: 1.75;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: #8c1515;
+      border-bottom: none;
+      padding: 0 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+
+    .nav-brand {
+      font-family: 'EB Garamond', serif;
+      font-size: 1.5rem;
+      color: #ffffff;
+      text-decoration: none;
+      letter-spacing: 0.01em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: 'EB Garamond', serif;
+      /* ← add this line */
+      font-size: 1.35rem;
+      font-weight: 400;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.75);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: #ffffff;
+    }
+
+    /* ── SECTIONS ── */
+    section {
+      display: none;
+      min-height: calc(100vh - 60px);
+      padding: 4rem 0;
+    }
+
+    section.active {
+      display: block;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 2.5rem;
+    }
+
+    /* ── HOME ── */
+    .home-grid {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 3.5rem;
+      align-items: start;
+      margin-bottom: 3rem;
+    }
+
+    .photo-placeholder {
+      width: 200px;
+      height: 220px;
+      background: #e8f0fe;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #8c1515;
+      font-size: 0.8rem;
+      gap: 8px;
+    }
+
+    .photo-placeholder svg {
+      opacity: 0.5;
+    }
+
+    .home-info h1 {
+      font-family: var(--serif);
+      font-size: 2.0rem;
+      font-weight: 400;
+      color: #1a1a2e;
+      line-height: 1.15;
+      margin-bottom: 0.4rem;
+    }
+
+    .home-info .title {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      font-weight: 400;
+      color: #8c1515;
+      letter-spacing: 0.04em;
+      margin-bottom: 0.25rem;
+    }
+
+    .home-info .affiliation {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+    }
+
+    .home-info .bio {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      color: var(--text);
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+    }
+
+    .contact-links {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .contact-links a {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      font-weight: 400;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: #8c1515;
+      text-decoration: none;
+      border-bottom: 1px solid #8c1515;
+      padding-bottom: 1px;
+      transition: opacity 0.2s;
+    }
+
+    .contact-links a:hover {
+      opacity: 0.65;
+    }
+
+    .news-block {
+      border-top: 1px solid var(--border);
+      padding-top: 2rem;
+    }
+
+    .section-label {
+      font-family: var(--serif);
+      font-size: 1.4rem;
+      font-weight: 400;
+      color: #1a1a2e;
+      margin-bottom: 1.25rem;
+    }
+
+    .news-item {
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      gap: 1rem;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.9rem;
+    }
+
+    .news-date {
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      padding-top: 2px;
+    }
+
+    /* ── RESEARCH ── */
+    .page-title {
+      font-family: var(--serif);
+      font-size: 2rem;
+      font-weight: 400;
+      color: #8c1515;
+      margin-bottom: 0.75rem;
+    }
+
+    .page-intro {
+      font-size: 0.97rem;
+      color: var(--text-muted);
+      max-width: 650px;
+      margin-bottom: 2.5rem;
+      line-height: 1.8;
+    }
+
+    .research-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .research-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 1.5rem;
+    }
+
+    .research-card .icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #e8f0fe;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1rem;
+    }
+
+    .research-card h3 {
+      font-family: var(--serif);
+      font-size: 1.15rem;
+      font-weight: 400;
+      color: #1a1a2e;
+      margin-bottom: 0.5rem;
+    }
+
+    .research-card p {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    /* ── PEOPLE ── */
+    .people-section+.people-section {
+      margin-top: 2.5rem;
+    }
+
+    .people-group-label {
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #1a73e8;
+      margin-bottom: 1rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .people-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 1rem;
+    }
+
+    .person-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 1.25rem 1rem;
+      text-align: center;
+    }
+
+    .person-avatar {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: #e8f0fe;
+      margin: 0 auto 0.75rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--serif);
+      font-size: 1.4rem;
+      color: #1a73e8;
+    }
+
+    .person-name {
+      font-size: 0.9rem;
+      font-weight: 400;
+      color: var(--navy);
+      margin-bottom: 0.2rem;
+    }
+
+    .person-role {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    /* ── PUBLICATIONS ── */
+    .pub-list {
+      list-style: none;
+    }
+
+    .pub-year {
+      font-family: var(--serif);
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #8c1515;
+      margin: 2rem 0 0.75rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .pub-item {
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: 240px 1fr auto;
+      gap: 1.25rem;
+      align-items: start;
+    }
+
+    .pub-thumb {
+      width: 240px;
+      height: 176px;
+      object-fit: cover;
+      border-radius: 3px;
+      border: none;
+      background: transparent;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+
+    .pub-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .pub-thumb-placeholder {
+      width: 240px;
+      height: 176px;
+      border-radius: 3px;
+      border: 1px solid var(--border);
+      background: #e8f0fe;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      flex-shrink: 0;
+      color: #8c1515;
+      font-size: 0.7rem;
+      text-align: center;
+    }
+
+    .pub-item:last-child {
+      border-bottom: none;
+    }
+
+    .pub-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 0.2rem;
+      line-height: 1.5;
+    }
+
+    .pub-authors {
+      font-size: 1rem;
+      color: var(--text-muted);
+      margin-bottom: 0.2rem;
+    }
+
+    .pub-venue {
+      font-size: 1rem;
+      color: #8c1515;
+      font-style: italic;
+    }
+
+    .pub-links {
+      display: flex;
+      gap: 0.5rem;
+      flex-shrink: 0;
+      margin-top: 4px;
+    }
+
+    .pub-link {
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      text-decoration: none;
+      color: var(--text-muted);
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .pub-link:hover {
+      border-color: var(--navy);
+      color: var(--navy);
+    }
+
+    /* ── OPENINGS ── */
+    .opening-block {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 1.75rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .opening-block h3 {
+      font-family: var(--serif);
+      font-size: 1.25rem;
+      font-weight: 400;
+      color: var(--navy);
+      margin-bottom: 0.5rem;
+    }
+
+    .opening-block p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.75;
+      margin-bottom: 0.75rem;
+    }
+
+    .tag {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      padding: 3px 10px;
+      background: #e8f0fe;
+      color: #1a73e8;
+      border-radius: 2px;
+      margin-right: 0.4rem;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem;
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      background: var(--white);
+    }
+
+    @media (max-width: 640px) {
+      .home-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .photo-placeholder {
+        width: 100%;
+        height: 180px;
+      }
+
+      .nav-links {
+        gap: 1rem;
+      }
+
+      .pub-item {
+        grid-template-columns: 1fr;
+      }
+
+      .pub-thumb,
+      .pub-thumb-placeholder {
+        width: 100%;
+        height: 140px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav>
+    <a class="nav-brand" href="#" onclick="showSection('home')">Qian Wu</a>
+    <ul class="nav-links">
+      <li><a href="#" onclick="showSection('home')" id="nav-home" class="active">Home</a></li>
+      <li><a href="#" onclick="showSection('research')" id="nav-research">Research</a></li>
+      <li><a href="#" onclick="showSection('people')" id="nav-people">People</a></li>
+      <li><a href="#" onclick="showSection('publications')" id="nav-publications">Publications</a></li>
+      <li><a href="#" onclick="showSection('openings')" id="nav-openings">Openings</a></li>
+    </ul>
+  </nav>
+
+  <!-- HOME -->
+  <section id="home" class="active">
+    <div class="container">
+      <div class="home-grid">
+        <div class="photo-placeholder">
+          <img src="images/Me.jpg" alt="Paper thumbnail">
+        </div>
+        <div class="home-info">
+          <h1>Qian Wu 吴谦</h1>
+          <div class="title">Assistant Professor · Department of Mechanics · School of Mechanics and Engineering Science
+          </div>
+          <div class="affiliation">Peking University · Beijing · China</div>
+          <p class="bio">
+            [Brief 2–3 sentence bio describing your research focus, methodology, and overarching goals. This is the
+            first thing visitors will read, so make it clear and compelling — explain what you work on and why it
+            matters.]
+          </p>
+          <div class="contact-links">
+            <a href="mailto:you@university.edu">Email</a>
+            <a href="https://scholar.google.com/citations?user=edAtIaAAAAAJ&hl=en">Google Scholar</a>
+            <a href="#">GitHub</a>
+            <a href="#">CV</a>
+            <a href="#">Twitter / X</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="news-block">
+        <div class="section-label">News</div>
+        <div class="news-item">
+          <div class="news-date">Jun 2025</div>
+          <div>[Paper title] accepted to [Conference/Journal]. Congrats to [Student Name]!</div>
+        </div>
+        <div class="news-item">
+          <div class="news-date">Apr 2025</div>
+          <div>Awarded [Grant Name] from [Funding Agency]. Looking forward to exciting new work ahead.</div>
+        </div>
+        <div class="news-item">
+          <div class="news-date">Jan 2025</div>
+          <div>Welcome to [Name], who joins the lab as a PhD student this semester.</div>
+        </div>
+        <div class="news-item">
+          <div class="news-date">Jun 2026</div>
+          <div>Dr. Qian Wu Joined Peking University as an Assistant Professor in the School of Mechanics and Engineering
+            Science.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESEARCH -->
+  <section id="research">
+    <div class="container">
+      <h2 class="page-title">Research</h2>
+      <p class="page-intro">
+        [1–2 sentence overview of your lab's research mission and the core problems you're tackling. This sets the stage
+        before the topic areas below.]
+      </p>
+      <div class="research-cards">
+        <div class="research-card">
+          <div class="icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1a73e8" stroke-width="1.8">
+              <circle cx="12" cy="12" r="9" />
+              <path d="M12 3v9l5 3" />
+            </svg>
+          </div>
+          <h3>Research Area One</h3>
+          <p>[Describe this research thread — what questions you're asking, what methods you use, and what impact it
+            has.]</p>
+        </div>
+        <div class="research-card">
+          <div class="icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1a73e8" stroke-width="1.8">
+              <path d="M4 4h6v6H4zm10 0h6v6h-6zM4 14h6v6H4zm10 4h6m-3-3v6" />
+            </svg>
+          </div>
+          <h3>Research Area Two</h3>
+          <p>[Describe this research thread — what questions you're asking, what methods you use, and what impact it
+            has.]</p>
+        </div>
+        <div class="research-card">
+          <div class="icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1a73e8" stroke-width="1.8">
+              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+            </svg>
+          </div>
+          <h3>Research Area Three</h3>
+          <p>[Describe this research thread — what questions you're asking, what methods you use, and what impact it
+            has.]</p>
+        </div>
+        <div class="research-card">
+          <div class="icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1a73e8" stroke-width="1.8">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+            </svg>
+          </div>
+          <h3>Research Area Four</h3>
+          <p>[Describe this research thread — what questions you're asking, what methods you use, and what impact it
+            has.]</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PEOPLE -->
+  <section id="people">
+    <div class="container">
+      <h2 class="page-title">People</h2>
+
+      <div class="people-section">
+        <div class="people-group-label">Principal Investigator</div>
+        <div class="people-grid">
+          <div class="person-card">
+            <div class="person-avatar">QW</div>
+            <div class="person-name">Qian Wu</div>
+            <div class="person-role">Assistant Professor</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="people-section">
+        <div class="people-group-label">PhD Students</div>
+        <div class="people-grid">
+          <div class="person-card">
+            <div class="person-avatar">AB</div>
+            <div class="person-name">Student Name</div>
+            <div class="person-role">PhD Student · Year 3</div>
+          </div>
+          <div class="person-card">
+            <div class="person-avatar">CD</div>
+            <div class="person-name">Student Name</div>
+            <div class="person-role">PhD Student · Year 2</div>
+          </div>
+          <div class="person-card">
+            <div class="person-avatar">EF</div>
+            <div class="person-name">Student Name</div>
+            <div class="person-role">PhD Student · Year 1</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="people-section">
+        <div class="people-group-label">Undergraduate & Visiting Researchers</div>
+        <div class="people-grid">
+          <div class="person-card">
+            <div class="person-avatar">GH</div>
+            <div class="person-name">Researcher Name</div>
+            <div class="person-role">Undergraduate Researcher</div>
+          </div>
+          <div class="person-card">
+            <div class="person-avatar">IJ</div>
+            <div class="person-name">Researcher Name</div>
+            <div class="person-role">Visiting Scholar</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PUBLICATIONS -->
+  <section id="publications">
+    <div class="container">
+      <h2 class="page-title">Publications</h2>
+      <p class="page-intro">* denotes equal contribution. For a full list, see <a
+          href="https://scholar.google.com/citations?user=edAtIaAAAAAJ&hl=en">Google Scholar</a>.</p>
+
+      <div class="pub-year">2026</div>
+      <ul class="pub-list">
+        <li class="pub-item">
+          <div class="pub-thumb">
+            <img src="images/PNAS1.png" alt="Paper thumbnail">
+          </div>
+          <div>
+            <div class="pub-title">SonoPIN enables precise, noninvasive, and efficient intracellular delivery of PROTACs
+            </div>
+            <div class="pub-authors">Yuqi Wu, Mingyuan Liu, Ke Li, Shanglin Li, Lai Yee Phoon, John Mai, Ying Chen, Wei
+              Yan, Shu Nakajima Lan, Joseph Rufo, Graham Milford, Ye He, <strong>Qian Wu</strong>, Shujie Yang, Li Lan,
+              Stephen J Benkovic, Tony Jun Huang</div>
+            <div class="pub-venue"><strong>PNAS</strong> 123, e2534439123 (2026)</div>
+          </div>
+          <div class="pub-links">
+            <a href="https://www.pnas.org/doi/abs/10.1073/pnas.2534439123" class="pub-link">Link</a>
+          </div>
+        </li>
+
+
+        <li class="pub-item">
+          <div class="pub-thumb">
+            <img src="images/NC1.png" alt="Paper thumbnail">
+          </div>
+          <div>
+            <div class="pub-title">Machine learning–driven design of engineered cilia enables hybrid operations in
+              acoustic microrobots
+            </div>
+            <div class="pub-authors">Yun Ling, Yujing Lu, Joseph Rich, Mingyuan Liu, Xianchen Xu, Ty Naquin, Ying Chen,
+              Shanglin Li, Ruoyu Zhong, Kaichun Yang, Shuaiguo Zhao, <strong>Qian Wu</strong>, Ke Jin, Tony Jun Huang
+            </div>
+            <div class="pub-venue"><strong>Nature Communications</strong>, (2026)</div>
+          </div>
+          <div class="pub-links">
+            <a href="https://www.nature.com/articles/s41467-026-70048-4" class="pub-link">Link</a>
+          </div>
+        </li>
+
+
+        <li class="pub-item">
+          <div class="pub-thumb">
+            <img src="images/PRL1.png" alt="Paper thumbnail">
+          </div>
+          <div>
+            <div class="pub-title">Physical realization of an anti-P-pseudo-Hermitian mechanical system</div>
+            <div class="pub-authors">Yanzheng Wang*, Jianlei Zhao*, <strong>Qian Wu</strong>, Xiaoming Zhou, Heng Jiang,
+              Weiqiu Chen, Mu Wang, Guoliang Huang</div>
+            <div class="pub-venue"><strong>Physical Review Letters</strong> 136, 096101 (2026)</div>
+          </div>
+          <div class="pub-links">
+            <a href="https://journals.aps.org/prl/abstract/10.1103/dvf6-gns1" class="pub-link">Link</a>
+            <a href="https://arxiv.org/abs/2510.07918" class="pub-link">arXiv</a>
+          </div>
+        </li>
+
+        <li class="pub-item">
+          <div class="pub-thumb">
+            <img src="images/SA1.png" alt="Paper thumbnail">
+          </div>
+          <div>
+            <div class="pub-title">Precision acoustofluidics for high-throughput mechanobiology in suspension cells
+            </div>
+            <div class="pub-authors">Kaichun Yang*, Ruoyu Zhong*, Ke Li*, John Mai, Pengzhan Liu, Ye He, Joseph Rich,
+              Ying Chen, Janna Wang, Zhiteng Ma, Xianchen Xu, <strong>Qian Wu</strong>, Tony Jun Huang</div>
+            <div class="pub-venue"><strong>Science Advances</strong> 12, eady1136 (2026)</div>
+          </div>
+          <div class="pub-links">
+            <a href="https://www.science.org/doi/full/10.1126/sciadv.ady1136" class="pub-link">Link</a>
+          </div>
+        </li>
+
+
+      </ul>
+
+      <div class="pub-year">2025</div>
+      <ul class="pub-list">
+        <li class="pub-item">
+          <div class="pub-thumb">
+            <img src="images/NC2.png" alt="Paper thumbnail">
+          </div>
+          <div>
+            <div class="pub-title">Experimental realization of temporal refraction and reflection in elastic beams
+            </div>
+            <div class="pub-authors">Shaoyun Wang*, Nan Shao*, Hui Chen, Jiaji Chen, Honghua Qian, <strong>Qian
+                Wu</strong>, Huiling Duan, Andrea Alú, Guoliang Huang</div>
+            <div class="pub-venue"><strong>Nature Communications</strong> 16, 9520 (2025)</div>
+          </div>
+          <div class="pub-links">
+            <a href="https://www.nature.com/articles/s41467-025-64530-8" class="pub-link">Link</a>
+            <a href="https://arxiv.org/abs/2501.09989" class="pub-link">arXiv</a>
+          </div>
+        </li>
+
+        <li class="pub-item">
+          <div class="pub-thumb">
+            <img src="images/SA3.png" alt="Paper thumbnail">
+          </div>
+          <div>
+            <div class="pub-title">Acoustofluidic system for targeted antibody removal in transplantation: Enabling
+              small-volume therapeutic apheresis
+            </div>
+            <div class="pub-authors">Zhiteng Ma, Riley Kahan, Jianping Xia, Mengxi Wu, Brandon Lu, Emeraghi David, Ye
+              He, Ying Chen, Jessica F Liu, Mingyuan Liu, Haojun Xu, Linda Stempora, Nader Abraham, Ruoyu Zhong, Kaichun
+              Yang, Ke Jin, Ke Li, Min Zhang, <strong>Qian
+                Wu</strong>, Andrew Barbas, Jean Kwun, Luke P Lee, Tony Jun Huang, Eileen T Chambers</div>
+            <div class="pub-venue"><strong>Science Advances</strong> 11, eady3262 (2025)</div>
+          </div>
+          <div class="pub-links">
+            <a href="https://www.science.org/doi/full/10.1126/sciadv.ady3262" class="pub-link">Link</a>
+          </div>
+        </li>
+
+        <li class="pub-item">
+          <div class="pub-thumb">
+            <img src="images/IJMS1.png" alt="Paper thumbnail">
+          </div>
+          <div>
+            <div class="pub-title">Dissipative locally resonant metasurfaces for low-frequency Rayleigh wave mitigation
+            </div>
+            <div class="pub-authors">Siqi Wang, Zhigang Cao, Shaoyun Wang, <strong>Qian
+                Wu</strong>, Jiaji Chen, Yuanqiang Cai, Guoliang Huang</div>
+            <div class="pub-venue"><strong>International Journal of Mechanical Sciences</strong> 296, 110233 (2025)
+            </div>
+          </div>
+          <div class="pub-links">
+            <a href="https://www.sciencedirect.com/science/article/pii/S0020740325003194" class="pub-link">Link</a>
+          </div>
+        </li>
+
+        <li class="pub-item">
+          <div class="pub-thumb">
+            <img src="images/IJMS2.png" alt="Paper thumbnail">
+          </div>
+          <div>
+            <div class="pub-title">Observation of multi-type corner states in right-angled trapezoidal sonic crystals
+            </div>
+            <div class="pub-authors">Tao Yang, <strong>Qian
+                Wu</strong>, Shaoyun Wang, Rongyao Wei, Yu Liu, Quan Wang, Heng Jiang, Guoliang Huang</div>
+            <div class="pub-venue"><strong>International Journal of Mechanical Sciences</strong> 293, 110144 (2025)
+            </div>
+          </div>
+          <div class="pub-links">
+            <a href="https://www.sciencedirect.com/science/article/pii/S0020740325002309" class="pub-link">Link</a>
+          </div>
+        </li>
+
+        <li class="pub-item">
+          <div class="pub-thumb">
+            <img src="images/JPD1.png" alt="Paper thumbnail">
+          </div>
+          <div>
+            <div class="pub-title">The 2024 phononic crystals roadmap
+            </div>
+            <div class="pub-authors">Yabin Jin, Daniel Torrent, Bahram Djafari Rouhani, Liangshu He, Yanxun Xiang,
+              Fu-Zhen Xuan, Zhongming Gu, Haoran Xue, Jie Zhu, <strong>Qian
+                Wu</strong>, Guoliang Huang, Pedro David García, Guillermo Arregui, Yi Chen, Sébastien Guenneau, Martin
+              Wegener, Muamer Kadic, Yongquan Liu, Jensen Li, Yue-Sheng Wang, Antonio Palermo, V Romero-García, S
+              Kuznetsova, É Cheron, M Lázaro Navarro, JP Groby, V Pagneux, Simon Félix, LM Garcia-Raffi, Gengkai Hu,
+              Runcheng Cai, Timon Rabczuk, Xiaoying Zhuang, Penglin Gao, Yegao Qu, Mahmoud I Hussein, Masahiro Nomura,
+              Yan Pennec, Feiyan Cai, Xinwei Li, Wei Zhai</div>
+            <div class="pub-venue"><strong>Journal of Physics D: Applied Physics</strong> 11, 113001 (2025)
+            </div>
+          </div>
+          <div class="pub-links">
+            <a href="https://iopscience.iop.org/article/10.1088/1361-6463/ad9ab2/meta" class="pub-link">Link</a>
+          </div>
+        </li>
+
+        <li class="pub-item">
+          <div class="pub-thumb">
+            <img src="images/LABCHIP1.png" alt="Paper thumbnail">
+          </div>
+          <div>
+            <div class="pub-title">Enhancing cancer therapy via acoustics: chemotherapy-enhanced tunable acoustofluidic
+              permeabilization (ChemoTAP)
+            </div>
+            <div class="pub-authors">Ruoyu Zhong*, Ke Li*, Kaichun Yang*, <strong>Qian
+                Wu</strong>, John DH Mai, Joseph Rich, Ying Chen, Xianchen Xu, Jianping Xia, Neil Upreti, Ke Jin, Shujie
+              Yang, Mingyuan Liu, Tony Jun Huang</div>
+            <div class="pub-venue"><strong>Lab on a Chip</strong> 25, 6314-6323 (2025)
+            </div>
+          </div>
+          <div class="pub-links">
+            <a href="https://pubs.rsc.org/en/content/articlehtml/2025/lc/d5lc00419e" class="pub-link">Link</a>
+          </div>
+        </li>
+
+
+
+      </ul>
+
+      <div class="pub-year">2024</div>
+      <ul class="pub-list">
+        <li class="pub-item">
+          <div class="pub-thumb">
+            <img src="images/JMPS1.png" alt="Paper thumbnail">
+          </div>
+          <div>
+            <div class="pub-title">Understanding of topological mode and skin mode morphing in 1D and 2D non-Hermitian
+              resonance-based meta-lattices
+            </div>
+            <div class="pub-authors"><strong>Qian
+                Wu</strong>, Shaoyun Wang, Honghua Qian, Yanzheng Wang, Guoliang Huang</div>
+            <div class="pub-venue"><strong>Journal of the Mechanics and Physics of Solids</strong> 193, 105907 (2024)
+            </div>
+          </div>
+          <div class="pub-links">
+            <a href="https://www.sciencedirect.com/science/article/pii/S0022509624003739" class="pub-link">Link</a>
+          </div>
+        </li>
+
+        <li class="pub-item">
+          <div class="pub-thumb">
+            <img src="images/JMPS1.png" alt="Paper thumbnail">
+          </div>
+          <div>
+            <div class="pub-title">Understanding of topological mode and skin mode morphing in 1D and 2D non-Hermitian
+              resonance-based meta-lattices
+            </div>
+            <div class="pub-authors"><strong>Qian
+                Wu</strong>, Shaoyun Wang, Honghua Qian, Yanzheng Wang, Guoliang Huang</div>
+            <div class="pub-venue"><strong>Journal of the Mechanics and Physics of Solids</strong> 193, 105907 (2024)
+            </div>
+          </div>
+          <div class="pub-links">
+            <a href="https://www.sciencedirect.com/science/article/pii/S0022509624003739" class="pub-link">Link</a>
+          </div>
+        </li>
+
+        <li class="pub-item">
+          <div class="pub-thumb">
+            <img src="images/JMPS1.png" alt="Paper thumbnail">
+          </div>
+          <div>
+            <div class="pub-title">Understanding of topological mode and skin mode morphing in 1D and 2D non-Hermitian
+              resonance-based meta-lattices
+            </div>
+            <div class="pub-authors"><strong>Qian
+                Wu</strong>, Shaoyun Wang, Honghua Qian, Yanzheng Wang, Guoliang Huang</div>
+            <div class="pub-venue"><strong>Journal of the Mechanics and Physics of Solids</strong> 193, 105907 (2024)
+            </div>
+          </div>
+          <div class="pub-links">
+            <a href="https://www.sciencedirect.com/science/article/pii/S0022509624003739" class="pub-link">Link</a>
+          </div>
+        </li>
+
+        <li class="pub-item">
+          <div class="pub-thumb">
+            <img src="images/JMPS1.png" alt="Paper thumbnail">
+          </div>
+          <div>
+            <div class="pub-title">Understanding of topological mode and skin mode morphing in 1D and 2D non-Hermitian
+              resonance-based meta-lattices
+            </div>
+            <div class="pub-authors"><strong>Qian
+                Wu</strong>, Shaoyun Wang, Honghua Qian, Yanzheng Wang, Guoliang Huang</div>
+            <div class="pub-venue"><strong>Journal of the Mechanics and Physics of Solids</strong> 193, 105907 (2024)
+            </div>
+          </div>
+          <div class="pub-links">
+            <a href="https://www.sciencedirect.com/science/article/pii/S0022509624003739" class="pub-link">Link</a>
+          </div>
+        </li>
+
+      </ul>
+    </div>
+  </section>
+
+  <!-- OPENINGS -->
+  <section id="openings">
+    <div class="container">
+      <h2 class="page-title">Openings</h2>
+      <p class="page-intro">
+        We are always looking for motivated students and researchers to join the lab. If you're interested in working
+        with us, please read the positions below and reach out.
+      </p>
+
+      <div class="opening-block">
+        <h3>PhD Students</h3>
+        <p>
+          We are recruiting PhD students for the upcoming academic year. We look for candidates with a strong background
+          in [relevant fields], curiosity, and a drive to tackle open problems. Prior research experience is a plus but
+          not required.
+        </p>
+        <p>
+          To apply, please submit your application through the [Department] graduate admissions portal. You're welcome
+          to email [your name] with the subject line "PhD Application — [Your Name]" and a brief statement of your
+          research interests.
+        </p>
+        <span class="tag">Funded Positions</span>
+        <span class="tag">Starting Fall 2025</span>
+      </div>
+
+      <div class="opening-block">
+        <h3>Postdoctoral Researchers</h3>
+        <p>
+          We occasionally have openings for postdoctoral researchers. If your research interests align with the lab's
+          work, please send your CV and a short research statement to [your email].
+        </p>
+        <span class="tag">By Interest</span>
+      </div>
+
+      <div class="opening-block">
+        <h3>Undergraduate Researchers</h3>
+        <p>
+          We welcome motivated undergraduates from [University Name] interested in gaining research experience. Students
+          typically commit 10–15 hours per week. Email [your name] with a brief description of your interests and any
+          relevant coursework or projects.
+        </p>
+        <span class="tag">Open Year-Round</span>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    &copy; 2025 Your Name · Department of [Your Field] · University Name
+  </footer>
+
+  <script>
+    function showSection(id) {
+      document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+      document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      document.getElementById('nav-' + id).classList.add('active');
+      window.scrollTo(0, 0);
+      return false;
+    }
+  </script>
+</body>
+
+</html>
